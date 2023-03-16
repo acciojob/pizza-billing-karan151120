@@ -8,8 +8,8 @@ public class DeluxePizza extends Pizza {
         toppings = true;
         cheese = true;
         if(isVeg)
-            setPrice(170);
+            setPrice(150);
         else
-            setPrice(220);
+            setPrice(200);
     }
 }
