@@ -3,7 +3,13 @@ package com.driver;
 public class DeluxePizza extends Pizza {
 
     public DeluxePizza(Boolean isVeg) {
+
         super(isVeg);
-        // your code goes here
+        toppings = true;
+        cheese = true;
+        if(isVeg)
+            setPrice(170);
+        else
+            setPrice(220);
     }
 }
