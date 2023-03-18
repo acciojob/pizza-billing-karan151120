@@ -6,22 +6,17 @@ public class Pizza {
     private Boolean isVeg;
     private String bill;
 
-    public boolean takeaway = false;
-    public boolean toppings = false;
-    public boolean cheese = false;
+    boolean extraCheese;
+    boolean extraToppings;
+    boolean takeaway;
+    boolean billGenerated;
+
 
     public Pizza(Boolean isVeg){
+        if(isVeg) setPrice(300);
+        else setPrice(400);
+
         this.isVeg = isVeg;
-        // if pizza is veg then add 300 to price
-        // otherwise add non veg price 400 to the price
-        if(isVeg == true) {
-            this.price = 300;
-            //System.out.println("Base Price Of The Pizza: 300");
-        }
-        else {
-            this.price = 400;
-            //System.out.println("Base Price Of The Pizza: 400");
-        }
     }
 
     public int getPrice(){
@@ -33,64 +28,56 @@ public class Pizza {
     }
 
     public void addExtraCheese(){
-        //add extraCheese price to the price
-        if(!cheese)
-        this.price = this.price + 80;
-
-        cheese = true;
+        if(!extraCheese) {
+            extraCheese = true;
+            setPrice(80);
+        }
     }
 
     public void addExtraToppings(){
-        if(!toppings) {
-            // add extraTopping price to the price
-            //if pizza is veg
-            if(isVeg)
-                this.price = this.price + 70;
-                //otherwise adding non veg topping price
-            else {
-                this.price = this.price + 120;
-            }
+        if(!extraToppings) {
+            extraToppings = true;
+            if(isVeg) setPrice(70);
+            else setPrice(120);
         }
-
-        toppings = true;
     }
 
     public void addTakeaway(){
-        // adding paperBag charges to the total prices
-        if(!takeaway)
-        this.price = this.price + 20;
-
-        takeaway = true;
+        if(!takeaway) {
+            takeaway = true;
+            setPrice(20);
+        }
     }
 
     public String getBill(){
         String ans = "";
-        if(isVeg) {
-            ans += "Base Price Of The Pizza: 300\n";
-        }
-        else {
-            ans += "Base Price Of The Pizza: 400\n";
-        }
+        if(!billGenerated) {
+            billGenerated = true;
 
-        if(cheese) {
-            ans += "Extra Cheese Added: 80\n";
-        }
-
-        if(toppings) {
-            if(isVeg) {
-                ans += "Extra Toppings Added: 70\n";
+            if(this.isVeg) {
+                ans += "Base Price Of The Pizza: " + 300 + "\n";
             }
-            else {
-                ans += "Extra Toppings Added: 120\n";
+            else{
+                ans += "Base Price Of The Pizza: " + 400 + "\n";
             }
+            if(extraCheese) {
+                ans += "Extra Cheese Added: " + 80 + "\n";
+            }
+            if(extraToppings) {
+                if(this.isVeg) {
+                    ans += "Extra Toppings Added: " + 70 + "\n";
+                }
+                else {
+                    ans += "Extra Toppings Added: " + 120 + "\n";
+                }
+            }
+            if(takeaway) {
+                ans += "Paperbag Added: " + 20 + "\n";
+            }
+            ans += "Total Price: " + this.price;
+            return ans;
         }
 
-        if(takeaway) {
-            ans += "Paperbag Added: 20\n";
-        }
-        this.bill = "" + this.price;
-        ans +=  "Total Price: " + this.bill;
-        return ans;
-        //return this.bill;
+        return this.bill;
     }
 }
