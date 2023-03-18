@@ -64,7 +64,6 @@ public class Pizza {
     }
 
     public String getBill(){
-        // your code goes here
         String ans = "";
         if(isVeg) {
             ans += "Base Price Of The Pizza: 300\n";
